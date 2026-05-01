@@ -1,20 +1,283 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>ONE Results Client Hub</title>
-<link rel="manifest" href="manifest.json">
+
+<style>
+:root{
+--gold:#C9A646;
+--black:#000;
+--white:#fff;
+--gray:#ccc;
+}
+
+body{
+margin:0;
+font-family:Arial, sans-serif;
+background:#000;
+color:#fff;
+}
+
+/* HEADER */
+.header{
+text-align:center;
+padding:30px 20px;
+}
+
+.logo{
+width:70px;
+height:70px;
+border-radius:50%;
+background:var(--gold);
+color:#000;
+display:flex;
+align-items:center;
+justify-content:center;
+font-weight:bold;
+margin:0 auto 15px;
+}
+
+h1{
+color:var(--gold);
+margin:0;
+letter-spacing:1px;
+}
+
+.sub{
+letter-spacing:5px;
+font-size:12px;
+}
+
+/* HERO */
+.hero{
+padding:0 20px 20px;
+}
+
+.hero h2{
+margin:0;
+font-size:28px;
+}
+
+.hero p{
+color:var(--gray);
+}
+
+/* GRID */
+.grid{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:15px;
+padding:20px;
+}
+
+.card{
+background:#fff;
+color:#000;
+border-radius:20px;
+padding:25px;
+text-align:center;
+font-weight:bold;
+box-shadow:0 15px 35px rgba(0,0,0,.4);
+cursor:pointer;
+transition:.2s;
+}
+
+.card:hover{
+transform:translateY(-5px);
+}
+
+/* SCREENS */
+.screen{
+display:none;
+padding:20px;
+}
+
+.active{
+display:block;
+}
+
+/* BUTTONS */
+button{
+background:var(--gold);
+border:none;
+padding:12px 18px;
+border-radius:10px;
+font-weight:bold;
+cursor:pointer;
+margin-top:10px;
+}
+
+/* LISTINGS */
+.listing{
+background:#fff;
+color:#000;
+border-radius:20px;
+overflow:hidden;
+margin-bottom:20px;
+}
+
+.listing img{
+width:100%;
+height:160px;
+object-fit:cover;
+}
+
+.listing-content{
+padding:15px;
+}
+
+.price{
+color:#a67c00;
+font-weight:bold;
+font-size:20px;
+}
+
+/* BACK BUTTON */
+.back{
+background:#222;
+color:#fff;
+}
+
+/* NAV */
+.nav{
+position:fixed;
+bottom:0;
+width:100%;
+max-width:500px;
+left:50%;
+transform:translateX(-50%);
+display:flex;
+justify-content:space-around;
+background:#111;
+padding:10px;
+}
+
+.nav button{
+background:none;
+color:#fff;
+font-size:12px;
+}
+
+.nav button span{
+display:block;
+color:var(--gold);
+font-size:20px;
+}
+</style>
+
 </head>
-<body style="background:#000;color:#fff;font-family:Arial;text-align:center;padding:40px;">
-<h1 style="color:#C9A646;">ONE RESULTS</h1>
-<p>REALTY GROUP</p>
-<p>Client Hub Loaded</p>
+
+<body>
+
+<div id="home" class="active">
+
+<div class="header">
+<div class="logo">ONE</div>
+<h1>ONE RESULTS</h1>
+<div class="sub">REALTY GROUP</div>
+</div>
+
+<div class="hero">
+<h2>Your Client Hub</h2>
+<p>Listings, documents, scheduling, and updates — all in one place.</p>
+</div>
+
+<div class="grid">
+<div class="card" onclick="show('listings')">🏡 Listings</div>
+<div class="card" onclick="show('buyer')">📄 Buyer Docs</div>
+<div class="card" onclick="show('seller')">📄 Seller Docs</div>
+<div class="card" onclick="show('schedule')">📅 Schedule</div>
+<div class="card" onclick="show('market')">📊 Market</div>
+<div class="card" onclick="show('contact')">📞 Contact</div>
+</div>
+
+</div>
+
+<!-- LISTINGS -->
+
+<div id="listings" class="screen">
+<button class="back" onclick="show('home')">Back</button>
+<h2>Featured Listings</h2>
+
+<div class="listing">
+<img src="https://images.unsplash.com/photo-1564013799919-ab600027ffc6">
+<div class="listing-content">
+<div class="price">$449,000</div>
+<p>123 Mountain View Lane</p>
+<button onclick="window.open('#')">View Listing</button>
+</div>
+</div>
+
+<div class="listing">
+<img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c">
+<div class="listing-content">
+<div class="price">$625,000</div>
+<p>88 River Ridge Drive</p>
+<button onclick="window.open('#')">View Listing</button>
+</div>
+</div>
+
+</div>
+
+<!-- BUYER -->
+
+<div id="buyer" class="screen">
+<button class="back" onclick="show('home')">Back</button>
+<h2>Buyer Docs</h2>
+<p>Upload your buyer guide, checklists, and process docs here.</p>
+</div>
+
+<!-- SELLER -->
+
+<div id="seller" class="screen">
+<button class="back" onclick="show('home')">Back</button>
+<h2>Seller Docs</h2>
+<p>Listing prep, marketing plans, and seller guides.</p>
+</div>
+
+<!-- SCHEDULE -->
+
+<div id="schedule" class="screen">
+<button class="back" onclick="show('home')">Back</button>
+<h2>Schedule Showing</h2>
+<button onclick="window.open('#')">Book Now</button>
+</div>
+
+<!-- MARKET -->
+
+<div id="market" class="screen">
+<button class="back" onclick="show('home')">Back</button>
+<h2>Market Updates</h2>
+<p>Add your reports here.</p>
+</div>
+
+<!-- CONTACT -->
+
+<div id="contact" class="screen">
+<button class="back" onclick="show('home')">Back</button>
+<h2>Contact</h2>
+<p>Your Name<br>Phone<br>Email</p>
+</div>
+
+<div class="nav">
+<button onclick="show('home')"><span>⌂</span>Home</button>
+<button onclick="show('listings')"><span>⌕</span>Listings</button>
+<button onclick="show('buyer')"><span>□</span>Docs</button>
+<button onclick="show('schedule')"><span>▦</span>Schedule</button>
+<button onclick="show('contact')"><span>♡</span>Profile</button>
+</div>
 
 <script>
-if ('serviceWorker' in navigator) {
-  navigator.serviceWorker.register('service-worker.js');
+function show(id){
+document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+document.getElementById('home').classList.remove('active');
+document.getElementById(id).classList.add('active');
+window.scrollTo(0,0);
 }
 </script>
+
 </body>
 </html>
