@@ -1,1 +1,85 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ONE Results</title>
+
+<style>
+body {margin:0;font-family:Arial;background:#000;color:#fff;text-align:center}
+h1{color:#C9A646}
+
+.grid{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:15px;
+padding:20px;
+}
+
+.card{
+background:#fff;
+color:#000;
+padding:25px;
+border-radius:20px;
+font-weight:bold;
+cursor:pointer;
+}
+
+.screen{display:none;padding:20px}
+.active{display:block}
+
+button{
+background:#C9A646;
+border:none;
+padding:10px 15px;
+border-radius:10px;
+}
+</style>
+
+</head>
+
+<body>
+
+<div id="home" class="active">
+<h1>ONE RESULTS</h1>
+<p>REALTY GROUP</p>
+
+<div class="grid">
+<div class="card" onclick="show('listings')">Listings</div>
+<div class="card" onclick="show('buyer')">Buyer Docs</div>
+<div class="card" onclick="show('seller')">Seller Docs</div>
+<div class="card" onclick="show('schedule')">Schedule</div>
+</div>
+</div>
+
+<div id="listings" class="screen">
+<button onclick="show('home')">Back</button>
+<h2>Listings Page</h2>
+</div>
+
+<div id="buyer" class="screen">
+<button onclick="show('home')">Back</button>
+<h2>Buyer Docs</h2>
+</div>
+
+<div id="seller" class="screen">
+<button onclick="show('home')">Back</button>
+<h2>Seller Docs</h2>
+</div>
+
+<div id="schedule" class="screen">
+<button onclick="show('home')">Back</button>
+<h2>Schedule</h2>
+</div>
+
+<script>
+function show(id){
+document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+document.getElementById('home').classList.remove('active');
+document.getElementById(id).classList.add('active');
+}
+</script>
+
+</body>
+</html>
 
