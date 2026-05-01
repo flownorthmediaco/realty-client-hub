@@ -1,1 +1,70 @@
+<div id="listings" class="screen">
+<button onclick="show('home')">Back</button>
+<h2>Listings</h2>
+
+<input id="search" placeholder="Search address..." style="width:100%;padding:10px;margin-bottom:10px">
+
+<div id="listingContainer"></div>
+</div>
+
+<script>
+let listings = [];
+
+async function loadListings(){
+const res = await fetch("YOUR GOOGLE SHEET CSV LINK");
+const data = await res.text();
+
+const rows = data.split("\n").slice(1);
+
+listings = rows.map(r=>{
+const c = r.split(",");
+return {
+price:c[0],
+address:c[1],
+beds:c[2],
+baths:c[3],
+sqft:c[4],
+image:c[5],
+link:c[6]
+};
+});
+
+renderListings(listings);
+}
+
+function renderListings(data){
+let html = "";
+
+data.forEach(l=>{
+html += `
+<div style="background:white;color:black;padding:15px;margin-bottom:15px;border-radius:15px;">
+<img src="${l.image}" style="width:100%;border-radius:10px;">
+<h3>$${l.price}</h3>
+<p>${l.address}</p>
+<p>${l.beds} Bed • ${l.baths} Bath • ${l.sqft} SqFt</p>
+
+<button onclick="window.open('${l.link}')">View</button>
+<button onclick="saveFavorite('${l.address}')">❤️ Save</button>
+</div>
+`;
+});
+
+document.getElementById("listingContainer").innerHTML = html;
+}
+
+document.getElementById("search").addEventListener("input", e=>{
+const val = e.target.value.toLowerCase();
+const filtered = listings.filter(l => l.address.toLowerCase().includes(val));
+renderListings(filtered);
+});
+
+function saveFavorite(home){
+let favs = JSON.parse(localStorage.getItem("favs") || "[]");
+favs.push(home);
+localStorage.setItem("favs", JSON.stringify(favs));
+alert("Saved!");
+}
+
+loadListings();
+</script>
 
